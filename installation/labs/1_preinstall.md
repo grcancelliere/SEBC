@@ -1,13 +1,15 @@
 1. Check `vm.swappiness` on all your nodes
     * Set the value to `1` if necessary
 
-[grcancelliere@sebcm ~]$ `sudo sysctl vm.swappiness`
+```
+[grcancelliere@sebcm ~]$ sudo sysctl vm.swappiness
 vm.swappiness = 1
-
+```
 	
 2. Show the mount attributes of all volumes
 
-[grcancelliere@sebcm ~]$ `mount -v`
+```
+[grcancelliere@sebcm ~]$ mount -v
 sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
 proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
 devtmpfs on /dev type devtmpfs (rw,nosuid,size=7166396k,nr_inodes=1791599,mode=755)
@@ -34,38 +36,44 @@ mqueue on /dev/mqueue type mqueue (rw,relatime)
 hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime)
 debugfs on /sys/kernel/debug type debugfs (rw,relatime)
 /dev/sda1 on /boot type ext4 (rw,relatime,discard,data=ordered)
-`/dev/sdc1 on /data type ext4 (rw,noatime)`
+/dev/sdc1 on /data type ext4 (rw,noatime)
 /dev/sdb1 on /mnt/resource type ext4 (rw,noatime,discard,data=ordered)
 tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=1435284k,mode=700,uid=1000,gid=1000)`
-
+```
 
 3. Show the reserve space of any non-root, `ext`-based volumes
     * XFS volumes do not maintain reserve space
 
 Azure creates a temporary volume in `/mnt/resource`, so the only non-root ext-base volume is /dev/sdc1
 
+```
 [grcancelliere@sebcm ~]$ `sudo tune2fs -l /dev/sdc1 | grep 'Reserved block count'`
 Reserved block count:     0
-
+```
 
 4. Disable transparent hugepage support
 
-[grcancelliere@sebcm ~]$ `cat /sys/kernel/mm/transparent_hugepage/enabled`
+```
+[grcancelliere@sebcm ~]$ cat /sys/kernel/mm/transparent_hugepage/enabled
 always madvise [never]
-[grcancelliere@sebcm ~]$ `cat /sys/kernel/mm/transparent_hugepage/defrag`
+[grcancelliere@sebcm ~]$ cat /sys/kernel/mm/transparent_hugepage/defrag
 always madvise [never]
+```
 
 4. List your network interface configuration
 
-[grcancelliere@sebcm ~]$ `ip link`
+```
+[grcancelliere@sebcm ~]$ ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT qlen 1000
     link/ether 00:0d:3a:2b:a7:16 brd ff:ff:ff:ff:ff:ff
-
+```
+	
 5. List forward and reverse host lookups using `getent` or `nslookup`
 
-[grcancelliere@sebcm ~]$ `for h in sebcm sebc1 sebc2 sebc3 sebc4; do nslookup $h; done`
+```
+[grcancelliere@sebcm ~]$ for h in sebcm sebc1 sebc2 sebc3 sebc4; do nslookup $h; done
 Server:         168.63.129.16
 Address:        168.63.129.16#53
 
@@ -95,10 +103,12 @@ Address:        168.63.129.16#53
 
 Name:   sebc4.kihzz02kljie5etfnlthlzhkid.ax.internal.cloudapp.net
 Address: 10.0.0.8
+```
 
 6. Show the <code>nscd</code> service is running
 
-[grcancelliere@sebcm ~]$ `sudo systemctl status nscd`
+```
+[grcancelliere@sebcm ~]$ sudo systemctl status nscd
 ● nscd.service - Name Service Cache Daemon
    Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
    Active: active (running) since Mon 2018-10-15 12:42:47 UTC; 28min ago
@@ -117,11 +127,12 @@ Oct 15 12:42:46 sebcm systemd[1]: Starting Name Service Cache Daemon...
 Oct 15 12:42:47 sebcm systemd[1]: Started Name Service Cache Daemon.
 Oct 15 12:42:49 sebcm nscd[803]: 803 monitored file '/etc/resolv.conf' was moved into place, adding watch
 Oct 15 12:43:06 sebcm nscd[803]: 803 checking for monitored file '/etc/netgroup': No such file or directory
-
+```
 
 7. Show the <code>ntpd</code> service is running<br>
 
-[grcancelliere@sebcm ~]$ `sudo systemctl status ntpd`
+```
+[grcancelliere@sebcm ~]$ sudo systemctl status ntpd
 ● ntpd.service - Network Time Service
    Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
    Active: active (running) since Mon 2018-10-15 12:42:47 UTC; 28min ago
@@ -140,3 +151,4 @@ Oct 15 12:42:51 sebcm ntpd[831]: new interface(s) found: waking up resolver
 Oct 15 12:42:58 sebcm ntpd[831]: 0.0.0.0 c614 04 freq_mode
 Oct 15 12:59:47 sebcm ntpd[831]: 0.0.0.0 0612 02 freq_set kernel 14.311 PPM
 Oct 15 12:59:47 sebcm ntpd[831]: 0.0.0.0 0615 05 clock_sync
+```
