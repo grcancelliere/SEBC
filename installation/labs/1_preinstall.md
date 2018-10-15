@@ -47,7 +47,7 @@ tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=1435284k,mode=
 Azure creates a temporary volume in `/mnt/resource`, so the only non-root ext-base volume is /dev/sdc1
 
 ```
-[grcancelliere@sebcm ~]$ `sudo tune2fs -l /dev/sdc1 | grep 'Reserved block count'`
+[grcancelliere@sebcm ~]$ sudo tune2fs -l /dev/sdc1 | grep 'Reserved block count'
 Reserved block count:     0
 ```
 
