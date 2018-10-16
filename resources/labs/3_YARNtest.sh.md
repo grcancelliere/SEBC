@@ -39,8 +39,8 @@ do
 	             results/tg-10GB-${i}-${j}-${k}  \
                      results/ts-10GB-${i}-${j}-${k} 1>>tera_${i}_${j}_${k}.out 2>>tera_${i}_${j}_${k}.err                         
         echo `date`" - Deleting TeraSort Suite files, Mappers: $i, Reducers: $j, Container Memory: $k"
-        time $HADOOP/hdfs dfs -rm -r -f -skipTrash results/tg-10GB-${i}-${j}-${k}                         
-        time $HADOOP/hdfs dfs -rm -r -f -skipTrash results/ts-10GB-${i}-${j}-${k}                 
+        $HADOOP/hdfs dfs -rm -r -f -skipTrash results/tg-10GB-${i}-${j}-${k}                         
+        $HADOOP/hdfs dfs -rm -r -f -skipTrash results/ts-10GB-${i}-${j}-${k}                 
       done
    done
 done
