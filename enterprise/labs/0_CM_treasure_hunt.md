@@ -11,7 +11,7 @@ In our current cluster the CDH services are Zookeeper, HDFS, YARN, Oozie, Hue, H
 After upgrading the CM server, an upgrade wizard will show the steps to upgrade the CM agents. If you don't want to use the wizard you can update the Cloudera Repository for your OS, stop the agent, update the package and start the upgraded agent.
 
 * `Give the `tsquery` statement used to chart Hue's CPU utilization?`
-`select cpu_system_rate + cpu_user_rate where category=ROLE and serviceName=$SERVICENAME` with `$SERVICENAME = hive`
+The query is `select cpu_system_rate + cpu_user_rate where category=ROLE and serviceName=$SERVICENAME` with `$SERVICENAME = hive`
 
 * `Name all the roles that make up the Hive service`
 The roles are Gateway, WebHCat Server, Hive Metastore Server and HiveServer2.
