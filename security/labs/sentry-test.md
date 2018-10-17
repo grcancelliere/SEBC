@@ -62,14 +62,14 @@ INFO  : OK
 [grcancelliere@grcsebcm ~]$ sudo useradd -u 1100 -g selector george
 [grcancelliere@grcsebcm ~]$ sudo useradd -u 1200 -g inserters ferdinand
 [grcancelliere@grcsebcm ~]$ sudo su
-[root@grcsebcm grcancelliere]# kadmin -q 'add_principal george'
+[root@grcsebcm grcancelliere]# kadmin.local -q 'add_principal george'
 Authenticating as principal admin/admin@HADOOP.COM with password.
 Password for admin/admin@HADOOP.COM:
 WARNING: no policy specified for george@HADOOP.COM; defaulting to no policy
 Enter password for principal "george@HADOOP.COM":
 Re-enter password for principal "george@HADOOP.COM":
 Principal "george@HADOOP.COM" created.
-[root@grcsebcm grcancelliere]# kadmin -q 'add_principal ferdinand'
+[root@grcsebcm grcancelliere]# kadmin.local -q 'add_principal ferdinand'
 Authenticating as principal admin/admin@HADOOP.COM with password.
 Password for admin/admin@HADOOP.COM:
 WARNING: no policy specified for ferdinand@HADOOP.COM; defaulting to no policy
