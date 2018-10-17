@@ -8,7 +8,7 @@ The Kerberos Security Realm value is displayed in Administration/Settings, Kerbe
 
 * `Which CDH service(s) host a property for enabling Kerberos authentication?`
 
-In our current cluster the CDH services are Zookeeper, HDFS, YARN, Oozie, Hue, Hive, Activity Monitor, Cloudera Navigator, Reports Manager and Service Monitor.
+In our current cluster the CDH services which support Kerberos Authentication are Zookeeper, HDFS, YARN, Oozie, Hue and Hive.
 
 * `How do you upgrade the CM agents?`
 
