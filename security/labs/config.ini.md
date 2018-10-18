@@ -1,7 +1,7 @@
 ```
 [General]
 # Hostname of the CM server.
-server_host=10.1.0.4
+server_host=grcsebcm
 
 # Port that the CM server is listening on.
 server_port=7182
@@ -116,7 +116,7 @@ dns_resolution_collection_timeout_seconds=30
 
 [Security]
 # Use TLS and certificate validation when connecting to the CM server.
-use_tls=0
+use_tls=1
 
 # The maximum allowed depth of the certificate chain returned by the peer.
 # The default value of 9 matches the default specified in openssl's
